@@ -1,0 +1,19 @@
+#Test\UserBundle\Entity\User:
+#    exclusion_policy: ALL
+#    xml_root_name: user
+#    properties:
+#        email:
+#            expose: false
+#            type: string
+#        nick:
+#            expose: true
+#            type: string
+
+FOS\UserBundle\Model\User:
+    exclusion_policy: ALL
+#    xml_root_name: user
+    properties:
+        username:
+            expose: true
+        email:
+            expose: true
