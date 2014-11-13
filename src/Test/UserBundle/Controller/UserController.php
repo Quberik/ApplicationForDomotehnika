@@ -12,7 +12,6 @@ namespace Test\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -68,7 +67,6 @@ class UserController extends Controller
         }
 
         $result = $this->container->get('serializer')->serialize($user, $_format);
-        var_dump($result);
         return new Response($result);
     }
 
