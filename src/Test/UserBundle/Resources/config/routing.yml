@@ -1,3 +1,6 @@
-video:
+user:
     resource: "@TestUserBundle/Resources/config/routing/user.yml"
     prefix: /api
+    type: rest
+    defaults:
+        _format: json|xml

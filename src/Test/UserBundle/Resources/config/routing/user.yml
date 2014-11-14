@@ -3,7 +3,6 @@ user_list:
     defaults: { _controller: TestUserBundle:User:list }
     requirements:
         _method:  GET
-        _format:  json|xml
 
 user_show:
     path:  /user/{id}.{_format}
@@ -11,11 +10,9 @@ user_show:
     requirements:
         id: \d+
         _method:  GET
-        _format:  json|xml
 
 user_update:
     path:  /user/{id}.{_format}
     defaults: { _controller: TestUserBundle:User:update }
     requirements:
         _method:  POST
-        _format:  json|xml
