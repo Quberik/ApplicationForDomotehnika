@@ -22,35 +22,31 @@ class UserController extends Controller
 {
 
     /**
-     * Get users list by @param
+     * Get users list by criteria
+     *
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param $_format
+     * @param int $limit
+     * @return Response
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, $_format)
     {
-        $finder = $this->container->get('fos_elastica.finder.search.user');
+        $finder = $this->container->get('fos_elastica.finder.api.user');
 
-        $query = new \Elastica\Query();
-        $facet = new \Elastica\Facet\Terms('tags');
-        $facet->setField('email');
-        $query->addFacet($facet);
+        $users = $finder->find(
+            $request->query->get("search")
+        );
 
-        $results = $finder->find($query);
-
-//        $users = $repository->findAny(
-//            array(
-//                'email' => $request->query->get('email'),
-//                'username' => $request->query->get('login'),
-//                'nick' => $request->query->get('nick')
-//            )
-//        );
-
-        return $this->render('::User/list.html.twig', array(
-            'users' => $results
-        ));
+        if($users) {
+            $result = $this->container->get('serializer')->serialize($users, $_format);
+            return new Response($result);
+        }
+        else throw $this->createNotFoundException('No user found');
     }
 
     /**
+     * Get one user by ID
+     *
      * @param $id
      * @param $_format
      * @return Response json|xml

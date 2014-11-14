@@ -1,0 +1,14 @@
+user_list:
+    path:  /user.{_format}
+    defaults: { _controller: TestUserBundle:User:list }
+    requirements:
+        _method:  GET
+        _format:  json|xml
+
+user_show:
+    path:  /user/{id}.{_format}
+    defaults: { _controller: TestUserBundle:User:show }
+    requirements:
+        id: \d+
+        _method:  GET
+        _format:  json|xml
