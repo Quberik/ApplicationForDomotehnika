@@ -1,8 +1,6 @@
 <?php
 
 /**
- * Author: Podluzhnyy Vladimir aka Quber
- * Contact: quber.one@gmail.com
  * Date & Time: 12.11.2014 / 18:05
  * Filename: UserController.php
  * Notes: Special for Domotehnika
@@ -13,10 +11,12 @@ namespace Test\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Test\UserBundle\Form\UserType;
 
 /**
  * Class UserController
  * @package Test\UserBundle\Controller
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
  */
 class UserController extends Controller
 {
@@ -26,8 +26,7 @@ class UserController extends Controller
      *
      * @param Request $request
      * @param $_format
-     * @param int $limit
-     * @return Response
+     * @return object Response json|xml
      */
     public function listAction(Request $request, $_format)
     {
@@ -41,15 +40,15 @@ class UserController extends Controller
             $result = $this->container->get('serializer')->serialize($users, $_format);
             return new Response($result);
         }
-        else throw $this->createNotFoundException('No user found');
+        else throw $this->createNotFoundException('No users found');
     }
 
     /**
      * Get one user by ID
      *
-     * @param $id
+     * @param int $id
      * @param $_format
-     * @return Response json|xml
+     * @return object Response json|xml
      */
     public function showAction($id, $_format)
     {
@@ -64,6 +63,38 @@ class UserController extends Controller
 
         $result = $this->container->get('serializer')->serialize($user, $_format);
         return new Response($result);
+    }
+
+    /**
+     * Update user by POST request
+     *
+     * @param Request $request
+     * @param int $id
+     * @return object Response json|xml
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('TestUserBundle:User')->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+        $form = $this->createForm(new UserType(), $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist($user);
+            $em->flush();
+            return new Response("User was updated", 200);
+        }
+
+        return new Response("Email is invalid or form is not submitted", 400);
+
     }
 
 }

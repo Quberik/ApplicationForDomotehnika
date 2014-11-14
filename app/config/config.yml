@@ -32,6 +32,9 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+fos_rest:
+    disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
+
 fos_user:
     db_driver: orm
     firewall_name: main
