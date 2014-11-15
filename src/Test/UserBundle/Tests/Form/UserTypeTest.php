@@ -6,6 +6,11 @@ use Test\UserBundle\Entity\User;
 use Test\UserBundle\Form\UserType;
 use Symfony\Component\Form\Test\TypeTestCase;
 
+/**
+ * Class TestedTypeTest
+ * @package Test\UserBundle\Tests\Form\Type
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
+ */
 class TestedTypeTest extends TypeTestCase
 {
 

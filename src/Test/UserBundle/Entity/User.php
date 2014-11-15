@@ -1,13 +1,5 @@
 <?php
 
-/**
- * Author: Podluzhnyy Vladimir aka Quber
- * Contact: quber.one@gmail.com
- * Date & Time: 12.11.2014 / 15:00
- * Filename: User.php
- * Notes: Special for Domotehnika
- */
-
 namespace Test\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
@@ -19,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Test\UserBundle\Entity\UserRepository")
  * @ORM\Table(name="test_user")
  * @package Test\UserBundle\Entity
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
  */
 class User extends BaseUser
 {

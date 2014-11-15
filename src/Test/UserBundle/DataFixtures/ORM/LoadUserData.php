@@ -1,13 +1,5 @@
 <?php
 
-/**
- * Author: Podluzhnyy Vladimir aka Quber
- * Contact: quber.one@gmail.com
- * Date & Time: 12.11.2014 / 19:05
- * Filename: TestUserBundle.php
- * Notes: Special for Domotehnika
- */
-
 namespace Test\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -20,6 +12,7 @@ use Faker\Factory;
 /**
  * Class LoadUserData
  * @package Test\UserBundle\DataFixtures\ORM
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
  */
 class LoadUserData implements FixtureInterface, ContainerAwareInterface
 {

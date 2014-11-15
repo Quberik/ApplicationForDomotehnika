@@ -1,13 +1,5 @@
 <?php
 
-/**
- * Author: Podluzhnyy Vladimir aka Quber
- * Contact: quber.one@gmail.com
- * Date & Time: 12.11.2014 / 15:00
- * Filename: TestUserExtenshion.php
- * Notes: Special for Domotehnika
- */
-
 namespace Test\UserBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,6 +11,7 @@ use Symfony\Component\DependencyInjection\Loader;
  * Class TestUserExtension
  * This is the class that loads and manages your bundle configuration
  * @package Test\UserBundle\DependencyInjection
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
  */
 class TestUserExtension extends Extension
 {

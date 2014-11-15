@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Date & Time: 12.11.2014 / 18:05
- * Filename: UserController.php
- * Notes: Special for Domotehnika
- */
-
 namespace Test\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

@@ -1,20 +1,17 @@
 <?php
 
-/**
- * Создано при помощи PhpStorm.
- * Разработчик: Подлужный Владимир aka Quber
- * Контактные данные: quber.one@gmail.com
- * Дата и время создания: 14.11.2014 / 18:33
- * Название файла: UserType.php
- * Назначение:
- */
-
 namespace Test\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Class UserType
+ *
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
+ * @package Test\UserBundle\Form
+ */
 class UserType extends AbstractType
 {
 
