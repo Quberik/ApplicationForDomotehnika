@@ -30,11 +30,18 @@ class UserController extends Controller
      */
     public function listAction(Request $request, $_format)
     {
-        $finder = $this->container->get('fos_elastica.finder.api.user');
+        if($request->query->get("search"))
+        {
+            $finder = $this->container->get('fos_elastica.finder.api.user');
 
-        $users = $finder->find(
-            $request->query->get("search")
-        );
+            $users = $finder->find(
+                $request->query->get("search")
+            );
+        }
+        else {
+            $em = $this->getDoctrine()->getManager();
+            $users = $em->getRepository('TestUserBundle:User')->findAll();
+        }
 
         if($users) {
             $result = $this->container->get('serializer')->serialize($users, $_format);
