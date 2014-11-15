@@ -18,8 +18,9 @@ class UserController extends Controller
     /**
      * Get users list by criteria
      *
+     * @api
      * @param Request $request
-     * @param $_format
+     * @param string $_format
      * @return object Response json|xml
      */
     public function listAction(Request $request, $_format)
@@ -47,8 +48,9 @@ class UserController extends Controller
     /**
      * Get one user by ID
      *
+     * @api
      * @param int $id
-     * @param $_format
+     * @param string $_format
      * @return object Response json|xml
      */
     public function showAction($id, $_format)
@@ -69,6 +71,7 @@ class UserController extends Controller
     /**
      * Update user by POST request
      *
+     * @api
      * @param Request $request
      * @param int $id
      * @return object Response json|xml

@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
     /**
+     * @type integer
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,8 +24,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * User's nickname
-     *
+     * @type string|null User's nickname
      * @ORM\Column(length=30, nullable=true)
      */
     protected $nick;
