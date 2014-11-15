@@ -32,6 +32,9 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+fos_rest:
+    disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
+
 fos_user:
     db_driver: orm
     firewall_name: main
@@ -42,24 +45,34 @@ fos_elastica:
     clients:
         default: { host: localhost, port: 9200 }
     indexes:
-        search:
+        api:
             types:
                 user:
                     mappings:
-                        username: ~
-                        nick: ~
-                        email: ~
+                        username:
+                            type: string
+                        nick:
+                            type: string
+                        email:
+                            type: string
                     persistence:
                         driver: orm
                         model: Test\UserBundle\Entity\User
                         provider: ~
-                        listener:
-                            immediate: true
-                            logger: true
-                            insert: true
-                            update: false
-                            delete: true
                         finder: ~
+#            settings:
+#                index:
+#                    analysis:
+#                        analyzer:
+#                            my_analyzer:
+#                                type: custom
+#                                tokenizer: lowercase
+#                                filter   : [my_ngram]
+#                        filter:
+#                            my_ngram:
+#                                type: "nGram"
+#                                min_gram: 1
+#                                max_gram: 20
 
 assetic:
     debug:          "%kernel.debug%"

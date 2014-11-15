@@ -1,60 +1,57 @@
 <?php
 
-/**
- * Author: Podluzhnyy Vladimir aka Quber
- * Contact: quber.one@gmail.com
- * Date & Time: 12.11.2014 / 18:05
- * Filename: UserController.php
- * Notes: Special for Domotehnika
- */
-
 namespace Test\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
+use Test\UserBundle\Form\UserType;
 
 /**
  * Class UserController
  * @package Test\UserBundle\Controller
+ * @author Podluzhnyy Vladimir aka Quber <quber.one@gmail.com>
  */
 class UserController extends Controller
 {
 
     /**
-     * Get users list by @param
+     * Get users list by criteria
+     *
+     * @api
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param string $_format
+     * @return object Response json|xml
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request, $_format)
     {
-        $finder = $this->container->get('fos_elastica.finder.search.user');
+        if($request->query->get("search"))
+        {
+            $finder = $this->container->get('fos_elastica.finder.api.user');
 
-        $query = new \Elastica\Query();
-        $facet = new \Elastica\Facet\Terms('tags');
-        $facet->setField('email');
-        $query->addFacet($facet);
+            $users = $finder->find(
+                $request->query->get("search")
+            );
+        }
+        else {
+            $em = $this->getDoctrine()->getManager();
+            $users = $em->getRepository('TestUserBundle:User')->findAll();
+        }
 
-        $results = $finder->find($query);
-
-//        $users = $repository->findAny(
-//            array(
-//                'email' => $request->query->get('email'),
-//                'username' => $request->query->get('login'),
-//                'nick' => $request->query->get('nick')
-//            )
-//        );
-
-        return $this->render('::User/list.html.twig', array(
-            'users' => $results
-        ));
+        if($users) {
+            $result = $this->container->get('serializer')->serialize($users, $_format);
+            return new Response($result);
+        }
+        else throw $this->createNotFoundException('No users found');
     }
 
     /**
-     * @param $id
-     * @param $_format
-     * @return Response json|xml
+     * Get one user by ID
+     *
+     * @api
+     * @param int $id
+     * @param string $_format
+     * @return object Response json|xml
      */
     public function showAction($id, $_format)
     {
@@ -68,8 +65,40 @@ class UserController extends Controller
         }
 
         $result = $this->container->get('serializer')->serialize($user, $_format);
-        var_dump($result);
         return new Response($result);
+    }
+
+    /**
+     * Update user by POST request
+     *
+     * @api
+     * @param Request $request
+     * @param int $id
+     * @return object Response json|xml
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('TestUserBundle:User')->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+        $form = $this->createForm(new UserType(), $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em->persist($user);
+            $em->flush();
+            return new Response("User was updated", 200);
+        }
+
+        return new Response("Email is invalid or form is not submitted", 400);
+
     }
 
 }

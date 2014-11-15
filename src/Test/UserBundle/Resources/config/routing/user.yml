@@ -1,0 +1,18 @@
+user_list:
+    path:  /user.{_format}
+    defaults: { _controller: TestUserBundle:User:list }
+    requirements:
+        _method:  GET
+
+user_show:
+    path:  /user/{id}.{_format}
+    defaults: { _controller: TestUserBundle:User:show }
+    requirements:
+        id: \d+
+        _method:  GET
+
+user_update:
+    path:  /user/{id}.{_format}
+    defaults: { _controller: TestUserBundle:User:update }
+    requirements:
+        _method:  POST

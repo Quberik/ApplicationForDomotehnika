@@ -1,0 +1,7 @@
+Test\UserBundle\Entity\User:
+    exclusion_policy: ALL
+    xml_root_name: user
+    properties:
+        nick:
+            expose: true
+            type: string
