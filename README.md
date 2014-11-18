@@ -4,10 +4,10 @@
 
 ## Установка приложения ##
 
-Качаем и устанавливаем [Composer](https://getcomposer.org/download/)
+Качаем и устанавливаем [Composer](https://getcomposer.org/download/)  
 Закачиваем приложение через Composer
 ```JSON
-composer.phar require Quberik\ApplicationForDomotehnika
+composer.phar create-project quberik/application-for-domotehnika -s dev
 ```  
 Создаём базу с именем `db_domotehnika`.  
 Создаём пользователя и пароль к базе: `user_domotehnika` и `Amyk9As449MhnO7`  
