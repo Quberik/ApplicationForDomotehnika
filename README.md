@@ -4,14 +4,7 @@
 
 ## Установка приложения ##
 
-Качаем и устанавливаем [Composer](https://getcomposer.org/installer)   - менеджер зависимостей  
-```Batchfile
-curl -sS https://getcomposer.org/installer | php
-```  
-Если curl не установлен  
-```Batchfile
-php -r "readfile('https://getcomposer.org/installer');" | php
-```  
+Качаем и устанавливаем [Composer](https://getcomposer.org/download/) в директорию проекта  
 Закачиваем приложение через Composer
 ```JSON
 composer.phar require Quberik\ApplicationForDomotehnika
@@ -28,7 +21,7 @@ php app/console doctrine:database:create
 ```JSON
 php app/console doctrine:fixtures:load
 ```  
-Устанавливаем сервер ElasticSearch локально. Порт `9200`  
+[Устанавливаем сервер ElasticSearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup-service.html) локально. Порт `9200`  
 Запускаем сервер ElasticSearch  
 Создаём индекс Elastic из базы данных  
 ```JSON
