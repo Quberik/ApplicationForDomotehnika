@@ -46,14 +46,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             $entity->setEmail($faker->freeEmail);
             $entity->setNick($faker->name);
             $entity->setUsername($faker->userName);
-
-            // Password generation
-            $encoder = $this->container->get('security.encoder_factory')->getEncoder($entity);
-            $entity->setPassword(
-                $encoder->encodePassword(
-                    $faker->password, $entity->getSalt()
-                )
-            );
+            $entity->setPassword($faker->password);
 
             $manager->persist($entity);
         }
