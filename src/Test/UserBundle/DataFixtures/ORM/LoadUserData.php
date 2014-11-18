@@ -40,7 +40,7 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
 
         $faker = Factory::create('ru_RU');
 
-        for ($i = 0; $i < 25; $i++)
+        for ($i = 0; $i < 100; $i++)
         {
             $entity = new User();
             $entity->setEmail($faker->freeEmail);
