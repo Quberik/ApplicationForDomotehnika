@@ -9,9 +9,12 @@
 ```JSON
 composer.phar create-project quberik/application-for-domotehnika -s dev
 ```  
-Создаём базу с именем `db_domotehnika`.  
 Создаём пользователя и пароль к базе: `user_domotehnika` и `Amyk9As449MhnO7`  
 Host: `localhost` (`127.0.0.1`)  
+Создаём базу данных
+```JSON  
+php app/console doctrine:database:create
+```  
 Открываем консоль. Переходим в директорию проекта и создаём таблицы в базе данных:  
 ```JSON 
 php app/console doctrine:schema:update --force  
@@ -26,32 +29,33 @@ php app/console doctrine:fixtures:load
 ```JSON
 app/console fos:elastica:populate
 ```  
+Устанавливаем права на папку app/cache и app/logs `777` и всех вложенных файлов и папок
 
 ## Функциональность приложения ##
 
 Получение списка пользователей в базе, GETзапрос:
 ```HTTP
-http://your_site.ru/user.json
+http://your_site.ru/api/user.json
 ```
 Получение списка пользователей по критерию (nick, login, email), GETзапрос:
 ```HTTP
-http://your_site.ru/user.json?search=@hotmail.com
+http://your_site.ru/api/user.json?search=@hotmail.com
 ```
 Получение пользователя по id, GETзапрос:
 ```HTTP
-http://your_site.ru/user/5.json
+http://your_site.ru/api/user/5.json
 ```
 Обновление пользователя (изменение ника, email), POSTзапрос:
 ```HTTP
-http://your_site.ru/user/5.json
+http://your_site.ru/api/user/5.json
 ```
 
 ## Опционально ##
 
 1. Переключение окружения (development, production):  
-`http://your-site.ru` - prod  
-`http://your-site.ru/app_dev.php` - dev  
-2. > Кастомные страницы 404й и 500й ошибок - не совсем понял, что тут имелось ввиду. Сейчас, если клиент делает запрос на сервер и ожидает json, то приходит json ответ с 404 или 500 ошибкой. Если клиент запрашивает xml, то ответ с ошибкой приходит также, только в формате xml. Если имелось ввиду ошибки ввиде html и css, то могу сделать.
+`http://your-site.ru/` - prod  
+`http://your-site.ru/app_dev.php/` - dev  
+2. > Кастомные страницы 404й и 500й ошибок - не совсем понял, что тут имелось ввиду. Сейчас, если клиент делает запрос на сервер и ожидает json, то приходит json ответ с 404 или 500 ошибкой. Если клиент запрашивает xml, то ответ с ошибкой приходит также, только в формате xml.
 3. Доступ к API осуществляется только авторизованному клиентскому приложению. Логин и пароль: `demo` и `demo`   
 
 ## Дополнительное задание ##
@@ -73,5 +77,14 @@ http://your_site.ru/user/5.json
 14. Вертикальное и горизонтальное масштабирование
 15. С помощью zabbix следим за нагрузкой и работой узлов системы
 16. Ну и последнее, используем несколько серверов на отдачу вместо одного   
+
+## Демо ##  
+```HTTP
+http://ussurka.ru/api/user.json
+http://ussurka.ru/api/user.json?search=@gmail.com
+http://ussurka.ru/api/user/2.json
+```
+Логин: `demo`  
+Пароль: `demo`  
 
 ###### Юнит тестирование не писал, к сожалению, небыло времени
