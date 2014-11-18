@@ -4,7 +4,7 @@
 
 ## Установка приложения ##
 
-Качаем и устанавливаем [Composer](https://getcomposer.org/download/) в директорию проекта  
+Качаем и устанавливаем [Composer](https://getcomposer.org/download/)
 Закачиваем приложение через Composer
 ```JSON
 composer.phar require Quberik\ApplicationForDomotehnika
