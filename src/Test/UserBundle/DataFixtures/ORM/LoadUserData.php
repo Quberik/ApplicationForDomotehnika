@@ -58,21 +58,6 @@ class LoadUserData implements FixtureInterface, ContainerAwareInterface
             $manager->persist($entity);
         }
 
-        // Demo
-        $demo = new User();
-        $demo->setUsername("demo");
-        $entity->setNick("demo");
-        $demo->setEmail('demo@demo.ru');
-        $demo->setEnabled(true);
-
-        $encoder = $this->container->get('security.encoder_factory')->getEncoder($demo);
-        $demo->setPassword(
-            $encoder->encodePassword(
-                'demo', $demo->getSalt()
-            )
-        );
-
-        $manager->persist($demo);
         $manager->flush();
 
     }
