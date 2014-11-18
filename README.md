@@ -15,7 +15,6 @@ Host: `localhost` (`127.0.0.1`)
 Открываем консоль. Переходим в директорию проекта и создаём таблицы в базе данных:  
 ```JSON 
 php app/console doctrine:schema:update --force  
-php app/console doctrine:database:create  
 ```  
 Загружаем фикстуры:  
 ```JSON
