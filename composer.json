@@ -1,5 +1,6 @@
 {
     "name": "quberik/application-for-domotehnika",
+    "minimum-stability": "dev",
     "license": "MIT",
     "type": "project",
     "description": "Test application for Domotehnika company",
