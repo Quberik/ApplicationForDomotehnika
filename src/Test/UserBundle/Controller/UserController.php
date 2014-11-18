@@ -35,6 +35,7 @@ class UserController extends Controller
         }
         else {
             $em = $this->getDoctrine()->getManager();
+            // TODO: не используем метод findAll() при большой базе
             $users = $em->getRepository('TestUserBundle:User')->findAll();
         }
 
